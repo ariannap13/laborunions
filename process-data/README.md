@@ -1,5 +1,5 @@
 This folder contains code to process NLRB union data, facebook data, create a mapping and producing a json file with main unions and events of involvement. 
-While by-product files will not be shared (but can be requested to the authors), the final json file will be shared.
+While by-product files will not be shared (but can be requested to the authors), initial NLRB merged data and the FB will be shared.
 
 # Process NLRB union data
 
@@ -7,7 +7,7 @@ After having collected all necessary offline data (reports of elections) from th
 
 ## Obtaining a single merged file with all offline events
 
-Clean and merge the elections data with ``./process_national_reports.ipynb``.
+Clean and merge the elections data obtained from the NLRB website with ``./process_national_reports.ipynb``. We share the final obtained dataset as a csv file.
 
 # Get online union activity data 
 
