@@ -31,12 +31,8 @@ First, using ``./exploratory_analysis/create_events_dict_fb.ipynb``, we generate
             {
                 "union": "union name according to offline data",
                 "case_number": "case number",
-                "case_filing_date": "date of petition filing for the case",
                 "case_winning_election_date": "date of election winning for the case" or "None",
                 "case_losing_election_date": "date of election losing for the case" or "None",
-                "case_name": "name of the case (employer)",
-                "case_city": "city of the case",
-                "case_state": "2-letters code of the state for the case"
             },
             ...]},
   ...
