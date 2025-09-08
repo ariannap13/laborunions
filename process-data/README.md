@@ -9,6 +9,10 @@ After having collected all necessary offline data (reports of elections) from th
 
 Clean and merge the elections data obtained from the NLRB website with ``./process_national_reports.ipynb``. We share the final obtained dataset as a csv file.
 
+## Merging with petition filings data
+
+We are interested in elections for which there has been a petition between January 2015 and December 2024 and that have been held beetween Jan 2015 and Dec 2024. We merge the petition data and election data in ``./merge_petitions_elections.ipynb``.
+
 # Get online union activity data 
 
 We first need to create and iteratively clean the hierarchy of unions (affiliation to AFL-CIO, main union, sub-union, district and local levels).
@@ -21,9 +25,10 @@ Then, we can identify the Facebook names of unions using Bing API:
 
 Using Facebook Research Platform (META API) we can then get the data for the accounts (see ``./get_producers_list.ipynb``) to get the producer list of such accounts.
 Finally, we retrieve data from FB (this is stored as ``./data/fb_data_with_predictions.csv`` and we already added the information on predicted frames, merging the dataset from FB with predicted frames inferred in ``../classification/``). 
+
 # Generation of framing usage time-series
 
-First, using ``./exploratory_analysis/create_events_dict_fb.ipynb``, we generate a dictionary of events (``./data/events_dict_fb_complete_all_contracts_all2024_new.json``) with the following stucture:
+First, using ``./exploratory_analysis/create_events_dict_fb.ipynb``, we generate a dictionary of events with the following stucture:
 ```json
 { "main_union": {
         "handle": "fb_handle",
