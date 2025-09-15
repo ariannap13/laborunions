@@ -1,4 +1,4 @@
-This folder contains all the code and data to reproduce the analyses of the paper "Framing Unionization: Facebook Communication around Representation Elections in U.S. Labor Unions".
+This folder contains all the code and data to reproduce the analyses of the paper "Framing Unionization on Facebook: Communication around Representation Elections in the United States".
 
 All analysis are performed with Python 3.8.16 and the list of required packages versions can be found in requirements.txt.
 

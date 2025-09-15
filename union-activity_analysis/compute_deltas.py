@@ -129,5 +129,5 @@ for main_union in tqdm(events_dict_complete.keys()):
 
 df_all = pd.concat(all_data, ignore_index=True)
 
-with open(f"../data/deltas_real_fake/deltas_{rolling_window}_{event}.pkl", "wb") as f:
+with open(f"../data/deltas_{rolling_window}_{event}.pkl", "wb") as f:
     pickle.dump(df_all, f)
