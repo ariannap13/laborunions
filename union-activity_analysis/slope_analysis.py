@@ -51,31 +51,7 @@ winning_deltas = winning_deltas[~winning_deltas['frame_prop'].str.contains("with
 if treatment == "remove_over":
     for seed in tqdm(range(20)):
 
-        # balance wins and losses per union
-
-        losing_deltas["outcome"] = "Losing"
-        winning_deltas["outcome"] = "Winning"
-
-        deltas_all = pd.concat([losing_deltas, winning_deltas], ignore_index=True)
-
-        # for each main union, balance the number of cases in losing and winning
-        list_union_cases = []
-        for union in deltas_all["main_union"].unique():
-            # get losing and winning cases for this union
-            losing_cases = deltas_all[(deltas_all["main_union"] == union) & (deltas_all["frame_prop"]=="rolling_community_prop") & (deltas_all["outcome"] == "Losing")]["case_number"].unique()
-            winning_cases = deltas_all[(deltas_all["main_union"] == union) & (deltas_all["frame_prop"]=="rolling_community_prop") & (deltas_all["outcome"] == "Winning")]["case_number"].unique()
-
-            cases_winning_sub = pd.Series(winning_cases).sample(n=len(losing_cases), random_state=42).tolist() if len(winning_cases) > len(losing_cases) else list(winning_cases)
-            cases_losing_sub = pd.Series(losing_cases).sample(n=len(winning_cases), random_state=42).tolist() if len(losing_cases) > len(winning_cases) else list(losing_cases)
-
-            list_union_cases += [(union, case, "Winning") for case in cases_winning_sub]
-            list_union_cases += [(union, case, "Losing") for case in cases_losing_sub]
-
-        deltas_all_sampled = deltas_all[deltas_all.apply(lambda row: (row["main_union"], row["case_number"], row["outcome"]) in list_union_cases, axis=1)].copy()
-        losing_deltas_sampled = deltas_all_sampled[deltas_all_sampled["outcome"] == "Losing"]
-        winning_deltas_sampled = deltas_all_sampled[deltas_all_sampled["outcome"] == "Winning"]
-
-        losing_deltas, winning_deltas = subsample_unions(losing_deltas_sampled, winning_deltas_sampled, seed)
+        losing_deltas, winning_deltas = subsample_unions(losing_deltas, winning_deltas, seed)
 
         # overall
         overall_deltas = pd.concat([losing_deltas, winning_deltas], ignore_index=True)
@@ -103,10 +79,10 @@ if treatment == "remove_over":
             winning_deltas[col] = winning_deltas[col].astype(str)
 
         # export data
-        with open(f"../data/deltas_5_Losing Election_withcategories_{treatment}_{seed}_sampled.pkl", "wb") as f:
+        with open(f"../data/deltas_5_Losing Election_withcategories_{treatment}_{seed}.pkl", "wb") as f:
             pickle.dump(losing_deltas, f)
 
-        with open(f"../data/deltas_5_Winning Election_withcategories_{treatment}_{seed}_sampled.pkl", "wb") as f:
+        with open(f"../data/deltas_5_Winning Election_withcategories_{treatment}_{seed}.pkl", "wb") as f:
             pickle.dump(winning_deltas, f)
 
 else:
