@@ -1,11 +1,7 @@
 import bambi as bmb
 import arviz as az
 import pandas as pd
-import formulae
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-import numpy as np
-import matplotlib.pyplot as plt
-import pickle as pkl
 import sys
 
 aggregation = "rolling"  # options: "rolling" or "all"

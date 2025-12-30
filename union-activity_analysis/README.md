@@ -21,7 +21,8 @@ We aim at detrending frames usage scores before and after the elections. As such
 
 # Predicting election outcomes
 1. Save data to be used as input for modeling with ``savedata_for_bayesian_modeling.py``.
-2. Fit Bayesian logistic regression model with ``bayesian_model.py``.
+2. Fit Bayesian logistic regression model with ``bayesian_model.py``. 
+The model fitting is performed using Python 3.11.1, with arviz==0.15.1 and bambi==0.13.0.
 3. Plot coefficients obtained from model fit with ``bayesian_coefficients_plot.ipynb``.
 
 # Pre- vs. post-event analysis

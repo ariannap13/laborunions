@@ -1,6 +1,6 @@
 This folder contains all the code and data to reproduce the analyses of the paper *"Framing Unionization on Facebook: Communication around Representation Elections in the United States"*.
 
-All analyses are performed with Python 3.8.16. The list of required package versions can be found in `requirements.txt`.
+All analyses are performed with Python 3.8.16 (except when noted differently). The list of required package versions can be found in `requirements.txt`.
 
 Here is a brief description of the sub-folders (further details can be found in the `README.md` files inside the folders):
 
