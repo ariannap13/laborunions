@@ -7,7 +7,7 @@ transformers_logger = logging.getLogger("transformers")
 transformers_logger.setLevel(logging.WARNING)
 cuda_available = torch.cuda.is_available()
 
-trainfile='../data/train_set_roberta_finetune.txt' # this is created from the 
+trainfile='../data/train_set_roberta_finetune.txt' 
 outdir='../models/roberta_finetuned/'
 
 model_args = {
