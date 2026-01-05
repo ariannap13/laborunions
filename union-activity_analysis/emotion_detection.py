@@ -1,6 +1,5 @@
 import pandas as pd
 from transformers import pipeline, AutoTokenizer
-import numpy as np
 from tqdm import tqdm
 import warnings
 import torch
@@ -15,16 +14,16 @@ max_length = 512
 stride = 256  # overlap
 
 def predict_long_text(text):
-    # 1. Tokenize once, without truncation
+    # Tokenize
     tokens = tokenizer(text, return_tensors="pt", truncation=False)
     input_ids = tokens["input_ids"][0]
 
-    # If text is short: classify normally
+    # If text is short, classify normally
     if len(input_ids) <= max_length:
         out = classifier(text)[0]
         return {d["label"]: d["score"] for d in out}
 
-    # 2. Build chunks directly as token tensors
+    # Build chunks directly as token tensors
     chunk_input_ids = []
     attention_masks = []
     for i in range(0, len(input_ids), stride):
@@ -45,15 +44,15 @@ def predict_long_text(text):
         "attention_mask": torch.stack(attention_masks)
     }
 
-    # 3. Run model manually (not through pipeline)
+    # Run model 
     with torch.no_grad():
         outputs = classifier.model(**batch)
         logits = outputs.logits  # shape (num_chunks, num_labels)
 
-    # 4. Convert logits to probabilities
+    # Convert logits to probabilities
     probs = torch.softmax(logits, dim=-1).cpu().numpy()
 
-    # 5. Aggregate by mean
+    # Aggregate by mean
     labels = classifier.model.config.id2label
     agg = {}
     for label_id, label_name in labels.items():
@@ -62,9 +61,9 @@ def predict_long_text(text):
     return agg
 
 
-posts_data_topredict = pd.read_csv("../data/posts_data_for_emotion_prediction.csv")
+posts_data_topredict = pd.read_csv("../data/fb_data_with_predictions.csv") # version without emotion predictions
+posts_data_topredict = posts_data_topredict[['id', 'text']]
 
-# apply predict_long_text to each post
 emotion_results = []
 for idx, row in tqdm(posts_data_topredict.iterrows(), total=len(posts_data_topredict)):
     text = row["text"]
@@ -75,4 +74,4 @@ for idx, row in tqdm(posts_data_topredict.iterrows(), total=len(posts_data_topre
         emotion_results.append(scores)
 
 emotion_df = pd.DataFrame(emotion_results)
-emotion_df.to_csv("../data/posts_emotion_predictions_mean-pool.csv", index=False)
+emotion_df.to_csv("../data/fb_data_with_predictions.csv", index=False)
