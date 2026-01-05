@@ -8,3 +8,5 @@ Here is a brief description of the sub-folders (further details can be found in 
 2. `classification` – Code for training and testing the discourse frames classifier.  
 3. `union-activity_analysis` – Scripts to analyze unions’ online activity and usage of discourse frames over election events.  
 4. `data` – Useful data files.
+
+HuggingFace link to models will be disclosed upon acceptance.
