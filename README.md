@@ -8,26 +8,3 @@ Here is a brief description of the sub-folders (further details can be found in 
 2. `classification` – Code for training and testing the discourse frames classifier.  
 3. `union-activity_analysis` – Scripts to analyze unions’ online activity and usage of discourse frames over election events.  
 4. `data` – Useful data files.
-
----
-
-## Pre-trained Models
-
-The models used in this project are available on Hugging Face:
-
-- **[RoBERTa fine-tuned on union Facebook posts](https://huggingface.co/ariannap22/roberta_finetuned_fb_unions)** – Language model fine-tuned on union-related language.  
-- **[RoBERTa multi-label discourse frames classifier](https://huggingface.co/ariannap22/roberta_finetuned_multilabel_unions)** – Classifies posts into the following frames: Diagnostic, Prognostic, Motivational, Community, Engagement, Political Endorsement.
-
-You can load these models in Python using `simpletransformers`:
-
-```python
-from simpletransformers.classification import MultiLabelClassificationModel
-import torch
-
-cuda_available = torch.cuda.is_available()
-
-model = MultiLabelClassificationModel(
-    'roberta',
-    "ariannap22/roberta_finetuned_multilabel_unions",
-    use_cuda=cuda_available
-)
