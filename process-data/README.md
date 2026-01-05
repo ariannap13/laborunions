@@ -13,6 +13,10 @@ Clean and merge the elections data obtained from the NLRB website with ``./proce
 
 We are interested in elections for which there has been a petition between January 2015 and December 2024 and that have been held beetween Jan 2015 and Dec 2024. We merge the petition data and election data in ``./merge_petitions_elections.ipynb``.
 
+## Useful information on union elections
+
+In the script ``election_density.ipynb``, we compute the average number of elections per week and the days in between two elections for a fixed set of workers.
+
 # Get online union activity data 
 
 We first need to create and iteratively clean the hierarchy of unions (affiliation to AFL-CIO, main union, sub-union, district and local levels).
